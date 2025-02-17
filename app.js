@@ -2,9 +2,12 @@ const express = require("express");
 const userRouter = require("./routers/userRouter.js");
 const studentRouter = require("./routers/studentRouter.js");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const connnectionDb = require("./config/db.js");
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -24,14 +27,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/student", studentRouter);
-mongoose
-  .connect(
-    "mongodb+srv://sheleshsingh755:3HirwL3YtjSWl3p7@cluster0.iioj7.mongodb.net/",
-    {
-      dbName: "STUDENT_PANEL",
-    }
-  )
-  .then(() => console.log("mongoDb conecting sucessfully"))
-  .catch((err) => console.log(err.message));
+
 const PORT = 4000;
-app.listen(PORT, () => console.log(`server is runnig ${PORT}`));
+app.listen(PORT, () => {
+  connnectionDb(), console.log(`server is runnig ${PORT}`);
+});

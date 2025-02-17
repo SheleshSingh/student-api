@@ -7,7 +7,6 @@ const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const { error } = userValidate({ name, email, password });
-    // console.log(error, "errors");
     if (error) return res.json({ message: error.message });
     const user = await userModel.findOne({ email });
     if (user) {
@@ -24,8 +23,7 @@ const createUser = async (req, res) => {
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
-    // res.status(201).send(newUser);
-    res.status(201).json({
+    res.status(200).json({
       message: "User successfully created",
       success: true,
     });
@@ -64,22 +62,6 @@ const loginUser = async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
-  // try {
-  //   const user = await userModel.findOne({ email });
-  //   if (!user) return res.json({ message: "User not find", success: false });
-
-  //   const validPassword = await bcrypt.compare(password, user.password);
-  //   if (!validPassword)
-  //     return res.json({ message: "Invalid credential", success: false });
-  //   const token = jwt.sign({ userId: user._id }, "!@#$%^&*()", {
-  //     expiresIn: "365d",
-  //   });
-  //   res
-  //     .status(200)
-  //     .json({ message: `Welcome${user.name}`, token, success: true });
-  // } catch (err) {
-  //   res.status(500).json({ message: err.message });
-  // }
 };
 
 // logout user

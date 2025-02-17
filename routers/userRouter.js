@@ -5,7 +5,7 @@ const {
   logoutUser,
   profileUser,
 } = require("../controllers/userController");
-const { protect } = require("../middlewares/protect");
+const protect = require("../middlewares/protect");
 
 const router = express.Router();
 router.post("/create", createUser);
