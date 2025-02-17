@@ -8,8 +8,8 @@ const {
 } = require("../controllers/studentController");
 const router = express.Router();
 
-router.post("/", studentCreate);
-router.get("/", studentGet);
+router.post("/create", studentCreate);
+router.get("/getstudent", studentGet);
 router.put("/:id", studentUpdate);
 router.delete("/:id", studentDelete);
 router.get("/:q", studentSearch);
